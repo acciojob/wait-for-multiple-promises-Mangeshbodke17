@@ -30,7 +30,7 @@
       </tr>
     </thead>
     <tbody id="output">
-      <tr>
+      <tr id="loading">
         <td colspan="2">Loading...</td>
       </tr>
     </tbody>
@@ -50,24 +50,22 @@
     const results = [];
     const output = document.getElementById("output");
 
-    // First promise
     createPromise(1)
       .then(result1 => {
         results.push(result1);
-        return createPromise(2); // chain 2nd
+        return createPromise(2);
       })
       .then(result2 => {
         results.push(result2);
-        return createPromise(3); // chain 3rd
+        return createPromise(3);
       })
       .then(result3 => {
         results.push(result3);
 
-        // All 3 done, calculate total
         const end = performance.now();
         const total = ((end - start) / 1000).toFixed(3);
 
-        output.innerHTML = "";
+        output.innerHTML = ""; // remove "Loading..." row
 
         results.forEach((res, idx) => {
           const row = document.createElement("tr");
