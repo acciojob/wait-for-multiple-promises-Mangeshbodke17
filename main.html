@@ -65,14 +65,20 @@
         const end = performance.now();
         const total = ((end - start) / 1000).toFixed(3);
 
-        output.innerHTML = ""; // remove "Loading..." row
+        // Remove only the loading row, not the whole tbody
+        const loadingRow = document.getElementById("loading");
+        if (loadingRow) {
+          loadingRow.remove();
+        }
 
+        // Add results rows
         results.forEach((res, idx) => {
           const row = document.createElement("tr");
           row.innerHTML = `<td>Promise ${idx + 1}</td><td>${res.time}</td>`;
           output.appendChild(row);
         });
 
+        // Add total row
         const totalRow = document.createElement("tr");
         totalRow.innerHTML = `<td>Total</td><td>${total}</td>`;
         output.appendChild(totalRow);
